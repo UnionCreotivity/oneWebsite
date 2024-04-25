@@ -7,6 +7,8 @@ import BottomTool from './components/BottomTool.vue'
 
 import CardOne from './components/CardOne.vue'
 import CardTwo from './components/CardTwo.vue'
+
+import ReserveForm from './components/ReserveForm.vue'
 </script>
 
 <template>
@@ -17,6 +19,8 @@ import CardTwo from './components/CardTwo.vue'
 
   <CardOne />
   <CardTwo />
+
+  <ReserveForm />
 </template>
 
 <style lang="scss">
@@ -26,5 +30,9 @@ import CardTwo from './components/CardTwo.vue'
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
+}
+
+body {
+  background-color: rgb(236, 228, 209);
 }
 </style>

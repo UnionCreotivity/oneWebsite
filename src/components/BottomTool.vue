@@ -4,7 +4,7 @@
       <div class="item">
         <a href="tel:03-3479656">
           <div class="item-icon-box">
-            <img class="item-icon" src="../assets/phone.svg" />
+            <img class="item-icon" src="../assets/images/phone.svg" />
           </div>
           <div class="item-text">播打電話</div>
         </a>
@@ -12,7 +12,7 @@
       <div class="item">
         <a href="http://">
           <div class="item-icon-box">
-            <img class="item-icon fb" src="../assets/fb.svg" />
+            <img class="item-icon fb" src="../assets/images/fb.svg" />
           </div>
           <div class="item-text">粉絲專頁</div>
         </a>
@@ -20,7 +20,7 @@
       <div class="item">
         <a href="http://">
           <div class="item-icon-box">
-            <img class="item-icon" src="../assets/pen.svg" />
+            <img class="item-icon" src="../assets/images/pen.svg" />
           </div>
           <div class="item-text">預約賞屋</div>
         </a>
@@ -28,7 +28,7 @@
       <div class="item">
         <a href="http://">
           <div class="item-icon-box more-icon">
-            <img class="item-icon" src="../assets/new_more.png" />
+            <img class="item-icon" src="../assets/images/new_more.png" />
           </div>
           <div class="item-text">更多功能</div>
         </a>

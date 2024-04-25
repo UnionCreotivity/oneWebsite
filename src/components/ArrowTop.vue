@@ -1,6 +1,6 @@
 <template>
   <a id="scroll-top-arrow" @click="scrollTop">
-    <img class="arrow" src="/src/assets/return.png" alt="" srcset="" />
+    <img class="arrow" src="../assets/images/return.png" alt="" srcset="" />
   </a>
 </template>
 <script setup>

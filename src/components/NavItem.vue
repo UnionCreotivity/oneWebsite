@@ -1,10 +1,10 @@
 <template>
   <nav id="navbar-box">
     <div class="navbar-container">
-      <img id="logo-img" src="../assets/logo.png" />
+      <img id="logo-img" src="../assets/images/logo.png" />
       <img
         id="moblie-menu-btn"
-        src="../assets/menu-icon.svg"
+        src="../assets/images/menu-icon.svg"
         alt=""
         @click="isMenuOpen = !isMenuOpen"
       />
@@ -16,7 +16,7 @@
 
   <div class="moblie-menu-box" v-if="isMenuOpen">
     <div class="close" @click="isMenuOpen = false">
-      <img id="moblie-menu-close-btn" src="../assets/close.svg" alt="" />
+      <img id="moblie-menu-close-btn" src="../assets/images/close.svg" alt="" />
     </div>
     <div class="moblie-menu">
       <a href="http://">預約賞屋</a>
