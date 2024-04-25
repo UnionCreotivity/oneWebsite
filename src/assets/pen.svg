@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_圖層_2" data-name="圖層 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 41">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <g id="_圖層_1-2" data-name="圖層 1">
+    <g id="out">
+      <path id="path" class="cls-1" d="M0,32.46v8.54H8.54L33.73,15.81,25.19,7.27,0,32.46H0ZM40.33,9.21c.89-.89,.89-2.32,0-3.21L35,.67c-.89-.89-2.32-.89-3.21,0l-4.17,4.17,8.54,8.54,4.17-4.17h0Z"/>
+    </g>
+  </g>
+</svg>
