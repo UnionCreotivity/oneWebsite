@@ -5,7 +5,6 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: CardOne,
     meta: { title: '' },
   },
   {
