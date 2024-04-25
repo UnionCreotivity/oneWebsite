@@ -9,7 +9,7 @@
         @click="isMenuOpen = !isMenuOpen"
       />
       <div class="pc-nav-link-box">
-        <a href="http://">預約賞屋</a>
+        <router-link :to="{ path: '/', hash: '#reserveForm' }">預約賞屋</router-link>
       </div>
     </div>
   </nav>

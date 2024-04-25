@@ -1,5 +1,5 @@
 <template>
-  <div class="form-box">
+  <div class="form-box" id="reserveForm">
     <div class="form">
       <div class="top-box">
         <div class="left-input">
