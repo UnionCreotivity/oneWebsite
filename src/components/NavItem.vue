@@ -19,7 +19,7 @@
       <img id="moblie-menu-close-btn" src="../assets/images/close.svg" alt="" />
     </div>
     <div class="moblie-menu">
-      <a href="http://">預約賞屋</a>
+      <router-link :to="{ path: '/', hash: '#reserveForm' }">預約賞屋</router-link>
     </div>
   </div>
 </template>

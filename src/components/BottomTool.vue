@@ -22,7 +22,9 @@
           <div class="item-icon-box">
             <img class="item-icon" src="../assets/images/pen.svg" />
           </div>
-          <div class="item-text">預約賞屋</div>
+          <router-link class="item-text" :to="{ path: '/', hash: '#reserveForm' }">
+            預約賞屋</router-link
+          >
         </a>
       </div>
       <div class="item">
