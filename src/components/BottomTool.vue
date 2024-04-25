@@ -2,7 +2,7 @@
   <div class="bottom-tool-box">
     <div class="tools">
       <div class="item">
-        <a href="http://">
+        <a href="tel:03-3479656">
           <div class="item-icon-box">
             <img class="item-icon" src="../assets/phone.svg" />
           </div>

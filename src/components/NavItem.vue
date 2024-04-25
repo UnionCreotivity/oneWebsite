@@ -15,6 +15,9 @@
   </nav>
 
   <div class="moblie-menu-box" v-if="isMenuOpen">
+    <div class="close" @click="isMenuOpen = false">
+      <img id="moblie-menu-close-btn" src="../assets/close.svg" alt="" />
+    </div>
     <div class="moblie-menu">
       <a href="http://">預約賞屋</a>
     </div>
@@ -100,6 +103,7 @@ const isMenuOpen = ref(false)
   -webkit-transition: all 1s ease-in-out;
   -o-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
+
   .moblie-menu {
     width: 100%;
     display: flex;
@@ -117,6 +121,16 @@ const isMenuOpen = ref(false)
       font-family: 'Noto Sans TC';
       font-weight: 400;
       text-decoration: none;
+    }
+  }
+
+  .close {
+    position: absolute;
+    top: 3vw;
+    left: 5vw;
+
+    img {
+      width: 20px;
     }
   }
 }
