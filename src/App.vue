@@ -9,6 +9,7 @@ import CardOne from './components/CardOne.vue'
 import CardTwo from './components/CardTwo.vue'
 
 import ReserveForm from './components/ReserveForm.vue'
+import Footerbox from './components/footer.vue'
 </script>
 
 <template>
@@ -21,6 +22,7 @@ import ReserveForm from './components/ReserveForm.vue'
   <CardTwo />
 
   <ReserveForm />
+  <Footerbox />
 </template>
 
 <style lang="scss">

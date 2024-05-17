@@ -63,7 +63,8 @@ import { ref } from 'vue'
   justify-content: center;
   z-index: 5;
   padding-top: 3vw;
-  margin-bottom: 3vw;
+  // margin-bottom: 3vw;
+  margin: 5%;
   background-color: rgb(236, 228, 209);
   @media all and (max-width: 1440px) {
     justify-content: space-around;
