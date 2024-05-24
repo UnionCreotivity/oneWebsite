@@ -14,7 +14,8 @@
         @click="isMenuOpen = !isMenuOpen"
       /> -->
       <div class="pc-nav-link-box">
-        <router-link :to="{ path: '/', hash: '#reserveForm' }">預約賞屋</router-link>
+        <!-- <router-link :to="{ path: '/', hash: '#reserveForm' }">預約賞屋</router-link> -->
+        <a href="javascritp:;" @click="menuBtn('#reserveForm')">預約賞屋</a>
       </div>
     </div>
   </nav>
@@ -24,18 +25,34 @@
       <img id="moblie-menu-close-btn" src="../assets/images/close.svg" alt="" />
     </div>
     <div class="moblie-menu">
-      <router-link :to="{ path: '/', hash: '#reserveForm' }">預約賞屋</router-link>
+      <!-- <router-link :to="{ path: '/', hash: '#reserveForm' }">預約賞屋</router-link> -->
+      <a href="javascritp:;" @click="menuBtn('#reserveForm')">預約賞屋</a>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, reactive, watch } from 'vue'
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 // import { debounce } from 'debounce'
+gsap.registerPlugin(ScrollToPlugin);
+
 const isMenuOpen = ref(false)
 const menu_list={
  
 };
+
+window.addEventListener('scroll', function() {
+  if(isMenuOpen){
+    isMenuOpen.value=false
+  }
+});
+
+function menuBtn (id) {
+  gsap.to(window, { duration: 1, scrollTo: id });
+  isMenuOpen.value=false;
+}
 
 </script>
 <style lang="scss" scoped>
@@ -43,23 +60,24 @@ const menu_list={
 
 #navbar-box {
   display: flex;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: #effaffd9;
   position: fixed;
   top: 0px;
   left: 0px;
   width: 100%;
   min-height: 50px;
   z-index: 110;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(4px);
   padding: 0.8vw;
   align-items: center;
 
   @media all and (max-width: 1024px) {
-    padding: 1vw 5vw;
+    background-color: #1a5a74d9;
+    padding: 1vw 2vw;
   }
 
   @media all and (max-width: 500px) {
-    padding: 0vw 3%;
+    padding: 0vw 1%;
     min-height: 40px;
   }
   .navbar-container {
@@ -88,32 +106,16 @@ const menu_list={
     //   }
     // }
 
-    $hamburger-layer-width: 18px;
-    $hamburger-layer-height: 2px;
     .hamburger{
       display: none;
-      // padding: 10px 5px;
-
-      // .hamburger-box{
-      //   width: $hamburger-layer-width;
-      //   height: 12px;
-
-      //   .hamburger-inner{
-      //     &::before{
-      //       top: -5px;
-      //     }
-      //     &::after{
-      //       top: -10px;
-      //     }
-      //   }
-
-      //   .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after{
-      //     width: $hamburger-layer-width;
-      //     height: $hamburger-layer-height;
-      //   }
-      // }
+    
       @media all and (max-width: 1024px) {
         display: flex;
+      }
+
+
+      .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after{
+        background-color:#fff;
       }
     }
 
@@ -143,7 +145,8 @@ const menu_list={
   z-index: 100;
   width: 100%;
   height: 100vh;
-  background-color: rgb(250, 233, 236);
+  background-color: rgb(26 91 116 / 85%);
+  backdrop-filter: blur(8px);
   transition: all 0.3s ease-in-out;
 
   @media all and (max-width: 1024px){
@@ -165,7 +168,7 @@ const menu_list={
     transform: translateY(-50%);
 
     a {
-      color: rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
       position: relative;
       font-size: 3.9vw;
       text-align: center;
@@ -173,6 +176,14 @@ const menu_list={
       font-family: 'Noto Sans TC';
       font-weight: 400;
       text-decoration: none;
+
+      @media (max-width:1024px) {
+        font-size: 2.6vw;
+      }
+
+      @media (max-width:500px) {
+        font-size: 3.9vw;
+      }
     }
   }
 

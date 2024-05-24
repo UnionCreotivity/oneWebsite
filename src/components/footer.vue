@@ -27,13 +27,29 @@
     letter-spacing: 0.05em;
     position: relative;
     z-index: 1;
+
+    @media (max-width: 1024px) {
+      padding-bottom: 70px;
+    }
+
     .flex_box{
         display: flex;
         justify-content: center;
+
+        @media (max-width: 1024px) {
+          flex-direction: column;
+          gap: 7px;
+        }
+
         span{
             font-weight: 300;
             font-family: "Noto Sans TC";
             margin: 0 5px;
+
+            @media (max-width: 1024px){
+              font-size: 13px;
+              letter-spacing: 0.1em;
+            }
         }
     }
     .footer_make{

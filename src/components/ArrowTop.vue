@@ -19,9 +19,9 @@ const scrollTop = () => {
 #scroll-top-arrow {
   position: fixed;
   display: flex;
-  bottom: 100px;
+  bottom: 122px;
   justify-content: center;
-  right: 35px;
+  right: 8px;
   z-index: 30;
   width: 45px;
   border-radius: 5px;
@@ -30,8 +30,8 @@ const scrollTop = () => {
   cursor: pointer;
 
   @media all and (max-width: 1024px) {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
   }
   .arrow {
     z-index: 32;
@@ -41,11 +41,7 @@ const scrollTop = () => {
     align-self: center;
     transition: all 1s ease-in-out;
     @media all and (max-width: 1024px) {
-      height: 4vw;
-    }
-
-    @media all and (max-width: 500px) {
-      height: 6vw;
+      height: 17px;
     }
   }
 }
