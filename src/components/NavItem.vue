@@ -32,7 +32,6 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch } from 'vue'
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 // import { debounce } from 'debounce'

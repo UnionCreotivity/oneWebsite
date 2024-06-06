@@ -1,5 +1,6 @@
 <script setup>
-import { RouterView } from 'vue-router'
+
+import Loading from './components/loading.vue'
 
 import NavItem from './components/NavItem.vue'
 import ArrowTop from './components/ArrowTop.vue'
@@ -13,6 +14,8 @@ import Footerbox from './components/footer.vue'
 </script>
 
 <template>
+  <Loading/>
+
   <NavItem />
   <RouterView />
   <ArrowTop />
@@ -20,7 +23,7 @@ import Footerbox from './components/footer.vue'
 
   <CardOne />
   <CardTwo />
-
+  
   <ReserveForm />
   <Footerbox />
 </template>

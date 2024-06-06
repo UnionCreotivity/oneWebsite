@@ -1,10 +1,10 @@
 <template>
   <div class="footer_div">
     <div class="flex_box">
-        <span>巨匠建設-心里有墅基地 </span>
-        <span> 田中造鎮，助您成家</span>
-        <span><i class="fa-solid fa-house"></i> 接待會館：彰化縣田中鎮復興路721號</span>
-        <span><i class="fa-solid fa-phone"></i> 禮賓專線：04-875-2199</span>
+        <span>{{caseData.web_title}}</span>
+        <span>{{ caseData.format }}</span>
+        <span v-if="caseData.build_adds!=''" ><i class="fa-solid fa-house"></i> 接待會館：{{ caseData.build_adds }}</span>
+        <span v-if="caseData.phone!=''"><i class="fa-solid fa-phone"></i> 禮賓專線：{{ caseData.phone }}</span>
     </div>
     <div class="footer_make">
       <a
@@ -16,7 +16,13 @@
     </div>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import {useCase} from '@/stores/case'
+
+  //-- 建案資料 --
+  let {caseData}=toRefs(useCase())
+
+</script>
 <style lang="scss" scoped>
  .footer_div{
     text-align: center;

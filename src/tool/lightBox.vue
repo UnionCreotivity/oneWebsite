@@ -1,23 +1,53 @@
 <template>
 <teleport to="body">
-    <div v-if="isOpen" class="lightbox">
-        <div  class="box">
-            <button class="close_btn">Ｘ</button>
-            <div class="content">
-                <slot></slot>
+    <transition name="showBox">
+        <div v-if="modelValue" class="lightbox" :class="{'show': modelValue}">
+            <div  class="box">
+                <button class="close_btn" @click="emit('update:modelValue', false)">Ｘ</button>
+                <div class="content">
+                    <slot></slot>
+                </div>
             </div>
         </div>
-    </div>
+    </transition>
 </teleport>
 </template>
 <script setup lang='ts'>
-    import {ref} from 'vue'
-    // let isOpen=ref(false) 
+    import {ref, watch} from 'vue'
+    import {gsap} from 'gsap'
 
+    defineProps(['modelValue'])
+    const emit= defineEmits(['update:modelValue'])
 
-    defineProps(['isOpen'])
 </script>
 <style lang='scss' scoped>
+
+.showBox-enter-active,
+.showBox-leave-active {
+  transition: opacity 0.5s;
+  opacity: 1;
+  .box{
+        transition: transform 0.4s;
+        transform: translateY(0px);
+  }
+}
+
+.showBox-enter-from,
+.showBox-leave-to {
+  opacity: 0;
+}
+
+.showBox-enter-from{
+  .box{
+    transform: translateY(40px);
+  }
+}
+.showBox-leave-to{
+  .box{
+    transform: translateY(-40px);
+  }
+}
+
  .lightbox{
     position: fixed;
     top: 0%;
@@ -29,6 +59,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     
     .box{
         position: relative;
@@ -47,6 +78,10 @@
 
         .content{
             padding: 15px;
+
+            h1,h2,h3,h4,p{
+                font-family: 'Noto Sans TC', sans-serif;
+            }
         }
     }
  }
