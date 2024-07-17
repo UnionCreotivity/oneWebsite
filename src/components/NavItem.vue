@@ -1,65 +1,63 @@
 <template>
   <nav id="navbar-box">
     <div class="navbar-container">
-      <img id="logo-img" src="../assets/images/logo.png" />
-      <button class="hamburger hamburger--spin" :class="{'is-active': isMenuOpen}" @click="isMenuOpen = !isMenuOpen" type="button">
+      <img :src="caseData.loading_logo" alt="" id="logo-img" />
+
+      <button
+        class="hamburger hamburger--spin"
+        :class="{ 'is-active': isMenuOpen }"
+        @click="isMenuOpen = !isMenuOpen"
+        type="button"
+      >
         <span class="hamburger-box">
           <span class="hamburger-inner"></span>
         </span>
       </button>
-      <!-- <img
-        id="moblie-menu-btn"
-        src="../assets/images/menu-icon.svg"
-        alt=""
-        @click="isMenuOpen = !isMenuOpen"
-      /> -->
+
       <div class="pc-nav-link-box">
-        <!-- <router-link :to="{ path: '/', hash: '#reserveForm' }">預約賞屋</router-link> -->
         <a href="javascritp:;" @click="menuBtn('#reserveForm')">預約賞屋</a>
       </div>
     </div>
   </nav>
 
-  <div class="moblie-menu-box" :class="{'show': isMenuOpen}">
+  <div class="moblie-menu-box" :class="{ show: isMenuOpen }">
     <div class="close" @click="isMenuOpen = false">
       <img id="moblie-menu-close-btn" src="../assets/images/close.svg" alt="" />
     </div>
     <div class="moblie-menu">
-      <!-- <router-link :to="{ path: '/', hash: '#reserveForm' }">預約賞屋</router-link> -->
       <a href="javascritp:;" @click="menuBtn('#reserveForm')">預約賞屋</a>
     </div>
   </div>
 </template>
 
 <script setup>
-import { gsap } from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-// import { debounce } from 'debounce'
-gsap.registerPlugin(ScrollToPlugin);
+import { gsap } from 'gsap'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import { ref, toRefs } from 'vue'
+import { useCase } from '@/stores/case'
 
+gsap.registerPlugin(ScrollToPlugin)
+let { caseData } = toRefs(useCase())
 const isMenuOpen = ref(false)
-const menu_list={
- 
-};
+const menu_list = {}
 
-window.addEventListener('scroll', function() {
-  if(isMenuOpen){
-    isMenuOpen.value=false
+window.addEventListener('scroll', function () {
+  if (isMenuOpen.value) {
+    isMenuOpen.value = false
   }
-});
+})
 
-function menuBtn (id) {
-  gsap.to(window, { duration: 1, scrollTo: id });
-  isMenuOpen.value=false;
+function menuBtn(id) {
+  gsap.to(window, { duration: 1, scrollTo: id })
+  isMenuOpen.value = false
 }
-
 </script>
 <style lang="scss" scoped>
-@import "hamburgers/_sass/hamburgers/hamburgers.scss";
+@import 'hamburgers/_sass/hamburgers/hamburgers.scss';
 
 #navbar-box {
   display: flex;
-  background-color: #effaffd9;
+  background-color: #778952;
   position: fixed;
   top: 0px;
   left: 0px;
@@ -67,7 +65,7 @@ function menuBtn (id) {
   min-height: 50px;
   z-index: 110;
   backdrop-filter: blur(4px);
-  padding: 0.8vw;
+  padding: 0.4vw;
   align-items: center;
 
   @media all and (max-width: 1024px) {
@@ -90,7 +88,9 @@ function menuBtn (id) {
       max-width: 1024px;
     }
     #logo-img {
-      height: 1vw;
+      width: auto !important;
+      height: 36px !important;
+      margin-top: 4px;
       @media all and (max-width: 1024px) {
         display: none;
       }
@@ -105,27 +105,29 @@ function menuBtn (id) {
     //   }
     // }
 
-    .hamburger{
+    .hamburger {
       display: none;
-    
+
       @media all and (max-width: 1024px) {
         display: flex;
       }
 
-
-      .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after{
-        background-color:#fff;
+      .hamburger-inner,
+      .hamburger-inner::before,
+      .hamburger-inner::after {
+        background-color: #fff;
       }
     }
 
     .pc-nav-link-box {
+      align-self: center;
       @media all and (max-width: 1024px) {
         display: none;
       }
       a {
-        color: rgb(0, 0, 0);
+        color: white;
         position: relative;
-        font-size: 0.8vw;
+        font-size: 16px;
         letter-spacing: 2px;
         font-family: 'Noto Sans TC';
         font-weight: 400;
@@ -148,13 +150,13 @@ function menuBtn (id) {
   backdrop-filter: blur(8px);
   transition: all 0.3s ease-in-out;
 
-  @media all and (max-width: 1024px){
+  @media all and (max-width: 1024px) {
     display: block;
   }
 
-  &.show{
+  &.show {
     opacity: 1;
-    visibility:visible;
+    visibility: visible;
     transform: translateY(0px);
   }
 
@@ -176,11 +178,11 @@ function menuBtn (id) {
       font-weight: 400;
       text-decoration: none;
 
-      @media (max-width:1024px) {
+      @media (max-width: 1024px) {
         font-size: 2.6vw;
       }
 
-      @media (max-width:500px) {
+      @media (max-width: 500px) {
         font-size: 3.9vw;
       }
     }

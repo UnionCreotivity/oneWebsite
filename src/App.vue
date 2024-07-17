@@ -1,31 +1,22 @@
 <script setup>
-
-import Loading from './components/loading.vue'
+import LoadingSpinner from './components/LoadingSpinner.vue'
 
 import NavItem from './components/NavItem.vue'
 import ArrowTop from './components/ArrowTop.vue'
 import BottomTool from './components/BottomTool.vue'
 
-import CardOne from './components/CardOne.vue'
-import CardTwo from './components/CardTwo.vue'
-
-import ReserveForm from './components/ReserveForm.vue'
-import Footerbox from './components/footer.vue'
+import FooterItem from './components/FooterItem.vue'
 </script>
 
 <template>
-  <Loading/>
+  <LoadingSpinner />
 
   <NavItem />
   <RouterView />
   <ArrowTop />
   <BottomTool />
 
-  <CardOne />
-  <CardTwo />
-  
-  <ReserveForm />
-  <Footerbox />
+  <FooterItem />
 </template>
 
 <style lang="scss">

@@ -47,3 +47,100 @@
     letter-spacing: 0.55em;
   }
 }
+@mixin hint() {
+  color: white;
+  font-size: 16px;
+  font-family: '微軟正黑體';
+  letter-spacing: 0.1em;
+  position: absolute;
+  bottom: 0.7vw;
+  right: 1vw;
+  text-shadow: rgb(134, 134, 134) 1px 0 10px;
+  @media all and (max-width: 1440px) {
+    bottom: 1vw;
+  }
+  @media all and (max-width: 1024px) {
+    font-size: 16px;
+    bottom: 2%;
+  }
+  @media all and (max-width: 500px) {
+    font-size: 2.8vw;
+    bottom: 4%;
+    right: 2%;
+  }
+}
+
+@mixin zhTitleText() {
+  color: #517226;
+  font-size: 2.1vw;
+  font-weight: bold;
+  font-family: 'Noto Serif TC';
+  letter-spacing: 0.05em;
+  align-items: center;
+  @media all and (max-width: 1024px) {
+    font-size: 5.7vw;
+    letter-spacing: 0.1em;
+  }
+}
+
+@mixin enTitle() {
+  color: #b3b5b8;
+  font-size: 1.58vw;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  font-family: 'Cormorant Garamond';
+  position: relative;
+
+  @media all and (max-width: 1024px) {
+    font-size: 4.3vw;
+  }
+}
+
+@mixin enTitleBorder() {
+  content: ' ';
+  position: absolute;
+  width: calc(100% - 2em);
+  height: 1px;
+  background-color: #d39f4a;
+  pointer-events: none;
+}
+
+@mixin zhTitleImg() {
+  width: 2.3vw;
+  min-width: 45px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  @media all and (max-width: 1024px) {
+    min-width: 35px;
+    width: 8.5vw;
+  }
+}
+
+@mixin content() {
+  color: #606060;
+  font-size: 0.95vw;
+  font-weight: 500;
+  font-family: 'Noto Serif TC';
+  letter-spacing: 0.15em;
+  line-height: 2;
+  @media all and (max-width: 1024px) {
+    font-size: 3.9vw;
+  }
+}
+
+@mixin swiperBullet() {
+  background: rgb(255, 255, 255, 50%);
+  opacity: 1;
+  width: 0.5vw;
+  height: 0.5vw;
+  min-width: 10px;
+  min-height: 10px;
+  border-radius: 50% !important;
+  @media all and (max-width: 1024px) {
+    width: 7px;
+    height: 7px;
+    min-width: 7px;
+    min-height: 7px;
+  }
+}
