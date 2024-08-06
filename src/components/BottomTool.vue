@@ -111,7 +111,7 @@
 </template>
 
 <script setup lang="ts">
-import LightBox from '@/tool/lightBox.vue'
+import LightBox from '../tool/LightBox.vue'
 import QRCodeVue3 from 'qrcode-vue3'
 import { useCase } from '@/stores/case'
 import { gsap } from 'gsap'
