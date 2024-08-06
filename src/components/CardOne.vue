@@ -84,7 +84,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'

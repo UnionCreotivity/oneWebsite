@@ -11,10 +11,16 @@ export default defineConfig({
     vue(),
     vueJsx(),
     AutoImport({
-      imports:['vue','vue-router'],
+      imports: ['vue', 'vue-router'],
       dts: 'src/auto-imports.d.ts', // 生成类型声明文件
-    })
+    }),
   ],
+  server: {
+    watch: {
+      usePolling: true,
+    }
+  },
+
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
