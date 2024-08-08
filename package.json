@@ -15,6 +15,7 @@
     "gsap": "npm:@gsap/shockingly@^3.12.5",
     "hamburgers": "^1.2.1",
     "pinia": "^2.1.7",
+    "qr-code-generator-vue3": "^1.4.21",
     "qrcode-vue3": "^1.6.8",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
