@@ -37,71 +37,54 @@
     </div>
 
     <div class="bottom-box">
-      <div class="swiper card4-swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide banner1">
-            <img
-              alt="c4_swiper1"
-              src="https://ws.srl.tw/cs/2024051711015229/img/img2024061914340342.webp"
-            />
-            <div class="hint">61快速道路實景示意圖</div>
-          </div>
+      <Swiper
+        class="swiper-container"
+        :modules="modules"
+        :loop="true"
+        :autoplay="{ delay: 2000 }"
+        :speed="1500"
+        :slides-per-view="1.7"
+        :centered-slides="true"
+        :slidesOffsetBefore="0"
+        effect="coverflow"
+        :coverflowEffect="{
+          slideShadows: true,
+          rotate: 0,
+          stretch: 0,
+          depth: 500
+        }"
+        @swiper="onSwiper"
+        navigation
+        :pagination="{ clickable: true }"
+      >
+        <SwiperSlide class="item">
+          <img
+            alt="c4_swiper1"
+            src="https://ws.srl.tw/cs/2024051711015229/img/img2024061914340342.webp"
+          />
+        </SwiperSlide>
+        <SwiperSlide class="item">
+          <img
+            alt="c4_swiper2"
+            src="https://ws.srl.tw/cs/2024051711015229/img/img2024061914341137.webp"
+          />
+        </SwiperSlide>
+        <SwiperSlide class="item">
+          <img
+            alt="c4_swiper3"
+            src="https://ws.srl.tw/cs/2024051711015229/img/img2024061914342332.webp"
+          />
+        </SwiperSlide>
+        <SwiperSlide class="item">
+          <img
+            alt="c4_swiper4"
+            src="https://ws.srl.tw/cs/2024051711015229/img/img2024061914343022.webp"
+          />
+        </SwiperSlide>
+        <!-- Pagination -->
 
-          <div class="swiper-slide banner2">
-            <img
-              alt="c4_swiper2"
-              src="https://ws.srl.tw/cs/2024051711015229/img/img2024061914341137.webp"
-            />
-            <div class="hint">機場捷運A15大園站實景示意圖</div>
-          </div>
-
-          <div class="swiper-slide banner3">
-            <img
-              alt="c4_swiper3"
-              src="https://ws.srl.tw/cs/2024051711015229/img/img2024061914342332.webp"
-            />
-            <div class="hint">桃園國際機場實景示意圖</div>
-          </div>
-
-          <div class="swiper-slide banner4">
-            <img
-              alt="c4_swiper4"
-              src="https://ws.srl.tw/cs/2024051711015229/img/img2024061914343022.webp"
-            />
-            <div class="hint">國二高速公路實景示意圖</div>
-          </div>
-
-          <div class="swiper-slide banner5">
-            <img
-              alt="c4_swiper5"
-              src="https://ws.srl.tw/cs/2024051711015229/img/img2024061914343729.webp"
-            />
-            <div class="hint">桃園高鐵站實景示意圖</div>
-          </div>
-        </div>
-
-        <div class="swiper-controller">
-          <div class="slider-controller">
-            <div class="slider-arrow prev">
-              <img
-                alt="prev"
-                src="https://ws.srl.tw/cs/2024051711015229/img/img2024061914344317.svg"
-                srcset=""
-              />
-            </div>
-
-            <div class="slider-arrow next">
-              <img
-                alt="next"
-                src="https://ws.srl.tw/cs/2024051711015229/img/img2024061914345114.svg"
-                srcset=""
-              />
-            </div>
-
-            <div class="swiper-pagination">&nbsp;</div>
-          </div>
-        </div>
-      </div>
+        <!-- Navigation -->
+      </Swiper>
     </div>
   </div>
 </template>
@@ -110,10 +93,24 @@
 import { onMounted } from 'vue'
 import { gsap } from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import 'swiper/css'
+import 'swiper/css/autoplay'
+import 'swiper/css/effect-coverflow'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 let vh = window.innerHeight * 0.01
 document.documentElement.style.setProperty('--vh', `${vh}px`)
 var window_width = window.innerWidth
 gsap.registerPlugin(ScrollTrigger)
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Autoplay, EffectCoverflow, Pagination, Navigation } from 'swiper/modules'
+
+const modules = [Autoplay, EffectCoverflow, Pagination, Navigation]
+
+const onSwiper = (swiperInstance: any) => {
+  Swiper.value = swiperInstance
+  console.log('Swiper effect:', Swiper.value.params)
+}
 
 onMounted(() => {
   let tl = gsap.timeline({
@@ -284,6 +281,32 @@ onMounted(() => {
         padding-bottom: 0px !important;
       }
 
+      ::v-deep .swiper-button-prev {
+        background-image: url('../assets/images/prev.svg');
+        color: rgba(255, 255, 255, 0);
+
+        width: 2vw;
+        height: 2vw;
+        background-repeat: no-repeat;
+        background-size: cover;
+        left: 19vw;
+      }
+
+      ::v-deep .swiper-button-next {
+        background-image: url('../assets/images/next.svg');
+        color: rgba(255, 255, 255, 0);
+
+        width: 2vw;
+        height: 2vw;
+        background-repeat: no-repeat;
+        background-size: cover;
+        right: 19vw;
+      }
+
+      ::v-deep .swiper-pagination-bullet-active {
+        background: white;
+      }
+
       .swiper-slide {
         width: 100%;
         overflow: hidden;
@@ -297,63 +320,6 @@ onMounted(() => {
         display: block;
         width: 100%;
         object-fit: cover;
-      }
-
-      .swiper-pagination {
-        bottom: 2%;
-      }
-
-      .swiper-pagination-bullet {
-        @include swiperBullet();
-      }
-
-      .swiper-pagination-bullet-active {
-        background: white;
-      }
-
-      .prev {
-        position: absolute;
-        top: 47%;
-        left: 23%;
-        z-index: 999;
-        cursor: pointer;
-        width: 2vw;
-
-        @media all and (max-width: 1024px) {
-          top: 26vw;
-          left: 3vw;
-          width: 6vw;
-        }
-
-        @media all and (max-width: 500px) {
-          width: 7vw;
-        }
-
-        img {
-          width: 100%;
-        }
-      }
-
-      .next {
-        position: absolute;
-        top: 47%;
-        right: 23%;
-        z-index: 999;
-        cursor: pointer;
-        width: 2vw;
-        @media all and (max-width: 1024px) {
-          top: 26vw;
-          right: 3vw;
-          text-align: right;
-          width: 6vw;
-        }
-        @media all and (max-width: 500px) {
-          width: 7vw;
-        }
-
-        img {
-          width: 100%;
-        }
       }
     }
   }

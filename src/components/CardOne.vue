@@ -75,9 +75,7 @@
     <div class="sub-title-box3">
       <div class="box">
         <div>淳釀14席</div>
-
         <div>68-71坪</div>
-
         <div>全新落成</div>
       </div>
     </div>
