@@ -81,9 +81,6 @@
             src="https://ws.srl.tw/cs/2024051711015229/img/img2024061914343022.webp"
           />
         </SwiperSlide>
-        <!-- Pagination -->
-
-        <!-- Navigation -->
       </Swiper>
     </div>
   </div>
@@ -98,6 +95,7 @@ import 'swiper/css/autoplay'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
+
 let vh = window.innerHeight * 0.01
 document.documentElement.style.setProperty('--vh', `${vh}px`)
 var window_width = window.innerWidth
