@@ -12,13 +12,12 @@
       </div>
 
       <div class="right">
-        <a data-fancybox="" href="https://ws.srl.tw/cs/2024051711015229/img/img2024062410292581.jpg"
-          ><img
-            alt="地圖"
-            class="map_img"
-            src="https://ws.srl.tw/cs/2024051711015229/img/img2024062410292581.jpg"
-          />
-        </a>
+        <div class="map-img-box">
+          <a href="https://ws.srl.tw/cs/2024051711015229/img/img2024062410292581.jpg" data-fancybox>
+            <img src="https://ws.srl.tw/cs/2024051711015229/img/img2024062410292581.jpg" />
+          </a>
+        </div>
+
         <img
           alt="葉子"
           class="leaf_img"
@@ -30,7 +29,10 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { ref } from 'vue'
+import { Fancybox } from '@fancyapps/ui'
+import '@fancyapps/ui/dist/fancybox/fancybox.css'
+Fancybox.bind('[data-fancybox]', {})
 </script>
 
 <style lang="scss" scoped>
@@ -70,7 +72,14 @@ import { onMounted } from 'vue'
   left: -20%;
   bottom: 0%;
 }
+.map-img-box {
+  width: 100%;
 
+  img {
+    width: 100%;
+    display: block;
+  }
+}
 @media all and (max-width: 900px) {
   .card4_2 {
     padding: 2vw 7vw;

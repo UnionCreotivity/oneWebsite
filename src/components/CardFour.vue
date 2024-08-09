@@ -107,7 +107,6 @@ const modules = [Autoplay, EffectCoverflow, Pagination, Navigation]
 
 const onSwiper = (swiperInstance: any) => {
   Swiper.value = swiperInstance
-  console.log('Swiper effect:', Swiper.value.params)
 }
 
 onMounted(() => {

@@ -190,7 +190,7 @@ function copyLink() {
   position: fixed;
   bottom: 0px;
   left: 0px;
-  background-color: #1a5b74;
+  background-color: #778952;
   backdrop-filter: blur(4px);
   width: 100%;
   z-index: 999;

@@ -30,7 +30,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { ref, toRefs } from 'vue'
@@ -69,7 +69,6 @@ function menuBtn(id) {
   align-items: center;
 
   @media all and (max-width: 1024px) {
-    background-color: #1a5a74d9;
     padding: 1vw 2vw;
   }
 

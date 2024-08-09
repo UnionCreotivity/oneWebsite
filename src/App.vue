@@ -31,4 +31,11 @@ import FooterItem from './components/FooterItem.vue'
 body {
   background-color: rgb(236, 228, 209);
 }
+img {
+  display: block;
+}
+
+.swal2-styled.swal2-confirm {
+  background-color: #7a9e75 !important;
+}
 </style>

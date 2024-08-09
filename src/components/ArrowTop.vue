@@ -19,9 +19,9 @@ const scrollTop = () => {
 #scroll-top-arrow {
   position: fixed;
   display: flex;
-  bottom: 122px;
+  bottom: 7vw;
   justify-content: center;
-  right: 8px;
+  right: 1.8vw;
   z-index: 30;
   width: 45px;
   border-radius: 5px;
