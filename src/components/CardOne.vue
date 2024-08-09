@@ -86,11 +86,20 @@
 import { onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'
+
 let vh = window.innerHeight * 0.01
 document.documentElement.style.setProperty('--vh', `${vh}px`)
 var window_width = window.innerWidth
 
 gsap.registerPlugin(SplitText)
+
+import { defineProps } from 'vue'
+
+const props = defineProps<{
+  noDelay?: boolean
+}>()
+
+const { noDelay } = props
 
 onMounted(() => {
   const zhTitle = document.querySelectorAll('.card1 .right-box .text-box .zh-name')
@@ -101,14 +110,17 @@ onMounted(() => {
       linesClass: 'clip-text'
     })
   })
-  let tl = gsap.timeline({ delay: 2 })
+
+  const card1Tl = noDelay === false ? gsap.timeline({ delay: 2 }) : gsap.timeline({ delay: 0 })
+
   if (window_width <= 1024) {
-    tl.from('.card1 .bottom-left-flower', {
-      x: '-10vw',
-      rotate: '-30deg',
-      duration: 1,
-      ease: 'power1.out'
-    })
+    card1Tl
+      .from('.card1 .bottom-left-flower', {
+        x: '-10vw',
+        rotate: '-30deg',
+        duration: 1,
+        ease: 'power1.out'
+      })
       .from(
         '.card1 .top-right-flower',
         { y: '-16vw', x: '-2vw', rotate: '15deg', duration: 1, ease: 'power2.out' },
@@ -177,12 +189,13 @@ onMounted(() => {
         '<0.3'
       )
   } else {
-    tl.from('.card1 .bottom-left-flower', {
-      x: '-10vw',
-      rotate: '-30deg',
-      duration: 1,
-      ease: 'power1.out'
-    })
+    card1Tl
+      .from('.card1 .bottom-left-flower', {
+        x: '-10vw',
+        rotate: '-30deg',
+        duration: 1,
+        ease: 'power1.out'
+      })
       .from(
         '.card1 .top-right-flower',
         { y: '-16vw', x: '-2vw', rotate: '15deg', duration: 1, ease: 'power2.out' },

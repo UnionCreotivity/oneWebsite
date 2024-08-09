@@ -178,6 +178,7 @@ function copyLink() {
 
   .qrcode_box {
     width: 90%;
+    display: contents;
   }
   .box_div {
     display: flex;

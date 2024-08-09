@@ -1,5 +1,5 @@
 <template>
-  <section class="cut-form">
+  <section class="cut-form" id="reserveForm">
     <div class="cut-form-title">
       <picture>
         <source
@@ -263,7 +263,7 @@ const submitForm = async () => {
 
 .small-flower {
   position: absolute;
-  right: 0px;
+  right: -4vw;
   bottom: -4px;
   width: 15%;
   @media all and (max-width: 1024px) {
@@ -479,12 +479,6 @@ const submitForm = async () => {
         height: 3.75vw;
       }
     }
-
-    .cut-form-special-line {
-      @media all and (max-width: 1024px) {
-        margin-left: 7.8%;
-      }
-    }
   }
 
   .form-memo {
@@ -500,6 +494,9 @@ const submitForm = async () => {
     }
     .cut-form-split-line {
       margin-left: 4.4%;
+      @media all and (max-width: 1024px) {
+        margin-left: 7.6%;
+      }
     }
   }
 

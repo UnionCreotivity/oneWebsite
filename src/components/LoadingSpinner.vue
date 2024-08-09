@@ -7,19 +7,20 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, toRefs } from 'vue'
+import { onMounted, toRefs, inject } from 'vue'
 import { useCase } from '@/stores/case'
 import { gsap } from 'gsap'
 
 //-- 建案資料 --
 let { caseData } = toRefs(useCase())
-
+const loadingComplete = inject('loadingComplete')
 onMounted(() => {
   let tl = gsap.timeline({ delay: 1.2 })
 
   tl.to('.LoadingSpinner .box_div', { opacity: 0, scale: 1.5, filter: 'blur(10px)', duration: 0.4 })
     .to('.LoadingSpinner img', { opacity: 0, y: -20, filter: 'blur(10px)', duration: 1 }, '>-0.1')
     .to('.LoadingSpinner', { opacity: 0, duration: 1 }, '<0.3')
+
     .to('.LoadingSpinner', { visibility: 'hidden' }, '>-0.2')
 })
 </script>

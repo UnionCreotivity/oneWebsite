@@ -19,7 +19,7 @@ const scrollTop = () => {
 #scroll-top-arrow {
   position: fixed;
   display: flex;
-  bottom: 7vw;
+  bottom: 5vw;
   justify-content: center;
   right: 1.8vw;
   z-index: 30;
@@ -32,6 +32,9 @@ const scrollTop = () => {
   @media all and (max-width: 1024px) {
     width: 30px;
     height: 30px;
+    bottom: 13vw;
+    justify-content: center;
+    right: 3.8vw;
   }
   .arrow {
     z-index: 32;
