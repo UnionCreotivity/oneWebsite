@@ -173,15 +173,6 @@ watch(areas, (newAreas) => {
 
 //送出資料
 const submitForm = async () => {
-  if (!caPrivacyChecked.value) {
-    Swal.fire({
-      icon: 'warning',
-      title: '請同意隱私權聲明',
-      text: '請勾選「同意個資告知事項聲明」後再提交表單。'
-    })
-    return
-  }
-
   if (formData.value.name === '') {
     Swal.fire({
       icon: 'warning',
@@ -198,6 +189,16 @@ const submitForm = async () => {
     return
   }
 
+  // 檢查手機號碼格式是否正確
+  if (!isValidPhoneNumber(formData.value.phone)) {
+    Swal.fire({
+      icon: 'warning',
+      title: '無效的手機號碼',
+      text: '請輸入正確的手機號碼。'
+    })
+    return
+  }
+
   if (selectedCity.value === '') {
     Swal.fire({
       icon: 'warning',
@@ -206,12 +207,11 @@ const submitForm = async () => {
     return
   }
 
-  // 檢查手機號碼格式是否正確
-  if (!isValidPhoneNumber(formData.value.phone)) {
+  if (!caPrivacyChecked.value) {
     Swal.fire({
       icon: 'warning',
-      title: '無效的手機號碼',
-      text: '請輸入正確的手機號碼。'
+      title: '請同意隱私權聲明',
+      text: '請勾選「同意個資告知事項聲明」後再提交表單。'
     })
     return
   }
@@ -624,6 +624,14 @@ const submitForm = async () => {
     font-size: 0.9vw;
     @media all and (max-width: 1024px) {
       font-size: 3.5vw;
+    }
+    #ca_privacy {
+      scale: 1.4;
+      cursor: pointer;
+      margin-right: 0.3vw;
+      @media all and (max-width: 1024px) {
+        scale: 1.2;
+      }
     }
   }
 }

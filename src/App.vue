@@ -34,4 +34,31 @@ img {
 .swal2-styled.swal2-confirm {
   background-color: #7a9e75 !important;
 }
+
+.fancybox__backdrop {
+  background: rgba(0, 0, 0, 0.445) !important;
+}
+
+.fancybox__content {
+  padding: 0 !important;
+}
+
+.has-iframe .fancybox__content,
+.has-map .fancybox__content,
+.has-pdf .fancybox__content {
+  width: 100% !important;
+  height: 95% !important;
+}
+
+.fancybox__content > .f-button.is-close-btn {
+  --f-button-width: 1.8vw !important;
+  --f-button-height: 1.8vw !important;
+}
+
+.fancybox__content > .f-button.is-close-btn {
+  background: #d4271b !important;
+  opacity: 1;
+  top: 1vw;
+  right: 2vw;
+}
 </style>

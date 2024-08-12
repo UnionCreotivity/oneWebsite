@@ -5,6 +5,7 @@
   <CardFour />
   <CardImgbox />
   <CardFive />
+  <GoogleLife />
   <ReserveForm />
   <FooterItem />
 </template>
@@ -16,8 +17,8 @@ import CardThree from '../components/CardThree.vue'
 import CardFour from '../components/CardFour.vue'
 import CardImgbox from '../components/CardImgbox.vue'
 import CardFive from '../components/CardFive.vue'
+import GoogleLife from '../components/GoogleLife.vue'
 import ReserveForm from '../components/ReserveForm.vue'
-import { defineProps } from 'vue'
 import { aniDelay } from '@/stores/aniDelay'
 import FooterItem from '../components/FooterItem.vue'
 const appStore = aniDelay()
