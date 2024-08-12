@@ -5,7 +5,7 @@ export const aniDelay = defineStore('app', {
     noDelay: false
   }),
   actions: {
-    setNoDelay(value: string) {
+    setNoDelay(value: boolean) {
       this.noDelay = value
     }
   }

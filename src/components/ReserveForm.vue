@@ -283,6 +283,9 @@ const submitForm = async () => {
     margin-top: 10vw;
     margin-bottom: 7vw;
   }
+  img {
+    width: 100%;
+  }
 }
 
 .cut-form-main {
@@ -572,12 +575,6 @@ const submitForm = async () => {
       margin-top: 3%;
     }
   }
-}
-
-.cut-form {
-  background-image: url(https://ws.srl.tw/cs/2024051711015229/img/img2024061915053184.png);
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .form-button {

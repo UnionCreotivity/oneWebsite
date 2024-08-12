@@ -36,6 +36,10 @@ const scrollTop = () => {
     justify-content: center;
     right: 3.8vw;
   }
+
+  @media all and (max-width: 500px) {
+    bottom: 18vw;
+  }
   .arrow {
     z-index: 32;
     mix-blend-mode: lighten;

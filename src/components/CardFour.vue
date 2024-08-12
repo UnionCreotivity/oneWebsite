@@ -278,10 +278,9 @@ onMounted(() => {
         padding-bottom: 0px !important;
       }
 
-      ::v-deep .swiper-button-prev {
+      :deep(.swiper-button-prev) {
         background-image: url('../assets/images/prev.svg');
         color: rgba(255, 255, 255, 0);
-
         width: 2vw;
         height: 2vw;
         background-repeat: no-repeat;
@@ -289,10 +288,9 @@ onMounted(() => {
         left: 19vw;
       }
 
-      ::v-deep .swiper-button-next {
+      :deep(.swiper-button-next) {
         background-image: url('../assets/images/next.svg');
         color: rgba(255, 255, 255, 0);
-
         width: 2vw;
         height: 2vw;
         background-repeat: no-repeat;
@@ -300,7 +298,7 @@ onMounted(() => {
         right: 19vw;
       }
 
-      ::v-deep .swiper-pagination-bullet-active {
+      :deep(.swiper-pagination-bullet-active) {
         background: white;
       }
 

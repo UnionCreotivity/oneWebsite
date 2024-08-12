@@ -4,8 +4,6 @@ import LoadingSpinner from './components/LoadingSpinner.vue'
 import NavItem from './components/NavItem.vue'
 import ArrowTop from './components/ArrowTop.vue'
 import BottomTool from './components/BottomTool.vue'
-
-import FooterItem from './components/FooterItem.vue'
 </script>
 
 <template>
@@ -15,8 +13,6 @@ import FooterItem from './components/FooterItem.vue'
   <RouterView />
   <ArrowTop />
   <BottomTool />
-
-  <FooterItem />
 </template>
 
 <style lang="scss">

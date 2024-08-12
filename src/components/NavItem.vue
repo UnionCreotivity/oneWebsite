@@ -15,11 +15,15 @@
       </button>
 
       <div class="mobile-project-news-box">
-        <div class="tab-item project-box">
-          <button @click="navigate">建案資訊</button>
+        <div class="tab-item project-box" :class="{ active: selectedTab === 'project' }">
+          <div class="item">
+            <button @click="navigate('project')">建案資訊</button>
+          </div>
         </div>
-        <div class="tab-item news-box">
-          <router-link to="/news">媒體報導</router-link>
+        <div class="tab-item news-box" :class="{ active: selectedTab === 'news' }">
+          <div class="item">
+            <router-link to="/news" @click.native="selectTab('news')">媒體報導</router-link>
+          </div>
         </div>
       </div>
 
@@ -64,13 +68,21 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { ref, toRefs } from 'vue'
 import { useCase } from '@/stores/case'
 import { useRouter } from 'vue-router'
-import { aniDelay } from '@/stores/aniDelay' // 如果你使用 Pinia
+import { aniDelay } from '@/stores/aniDelay'
 const router = useRouter()
 const appStore = aniDelay()
 
-const navigate = () => {
-  appStore.setNoDelay(true) // 設置 Pinia store 中的 noDelay
-  router.push('/home') // 導航到 /home
+const navigate = (tab: string) => {
+  appStore.setNoDelay(true)
+  selectedTab.value = tab // 設置選中的 tab
+  router.push('/home')
+}
+// 定義選中的選項，默認為空
+const selectedTab = ref<string>('project')
+
+// 選擇選項的函數
+const selectTab = (tab: string) => {
+  selectedTab.value = tab // 設置選中的 tab
 }
 
 gsap.registerPlugin(ScrollToPlugin)
@@ -108,11 +120,12 @@ const menuBtn = (selector: string) => {
   align-items: center;
 
   @media all and (max-width: 1024px) {
-    padding: 0vw 2vw;
+    padding: 0vw 0%;
+    align-items: inherit;
+    background-color: transparent;
   }
 
   @media all and (max-width: 500px) {
-    padding: 0vw 1%;
     min-height: 40px;
   }
 
@@ -124,7 +137,8 @@ const menuBtn = (selector: string) => {
     margin: 0 auto;
 
     @media all and (max-width: 1024px) {
-      max-width: 1024px;
+      max-width: inherit;
+      justify-content: inherit;
     }
     #logo-img {
       width: auto;
@@ -137,7 +151,7 @@ const menuBtn = (selector: string) => {
 
     .hamburger {
       display: none;
-
+      background-color: #778952;
       @media all and (max-width: 1024px) {
         display: flex;
       }
@@ -146,6 +160,8 @@ const menuBtn = (selector: string) => {
       .hamburger-inner::before,
       .hamburger-inner::after {
         background-color: #fff;
+        width: 34px;
+        height: 3px;
       }
     }
 
@@ -154,7 +170,7 @@ const menuBtn = (selector: string) => {
       @media all and (max-width: 1024px) {
         display: flex;
         justify-content: space-between;
-        width: 90%;
+        width: 100%;
         align-items: center;
       }
 
@@ -165,11 +181,41 @@ const menuBtn = (selector: string) => {
         align-items: center;
         text-align: center;
         letter-spacing: 0.2em;
-        padding: 12px 0px;
         width: 50%;
         font-size: 16px;
+        height: 100%;
+        background-color: #778952;
         a {
           color: white;
+          align-items: center;
+          justify-content: center;
+          display: flex;
+        }
+        .item {
+          height: 100%;
+          align-content: center;
+        }
+      }
+      .tab-item.active {
+        background-color: #f0f0f0;
+
+        a {
+          color: black;
+        }
+        button {
+          color: black;
+        }
+      }
+      .project-box {
+        button {
+          background: none;
+          border: none;
+          color: white;
+          width: 100%;
+          font-family: 'Noto Serif TC';
+          letter-spacing: 0.2em;
+          width: 50%;
+          font-size: 16px;
         }
       }
     }

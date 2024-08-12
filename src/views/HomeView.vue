@@ -6,6 +6,7 @@
   <CardImgbox />
   <CardFive />
   <ReserveForm />
+  <FooterItem />
 </template>
 
 <script setup lang="ts">
@@ -18,7 +19,7 @@ import CardFive from '../components/CardFive.vue'
 import ReserveForm from '../components/ReserveForm.vue'
 import { defineProps } from 'vue'
 import { aniDelay } from '@/stores/aniDelay'
-
+import FooterItem from '../components/FooterItem.vue'
 const appStore = aniDelay()
 const noDelay = appStore.noDelay
 </script>

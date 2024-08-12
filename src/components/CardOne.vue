@@ -86,12 +86,14 @@
 import { onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'
-
+import { useRoute } from 'vue-router'
 let vh = window.innerHeight * 0.01
 document.documentElement.style.setProperty('--vh', `${vh}px`)
 var window_width = window.innerWidth
 
 gsap.registerPlugin(SplitText)
+
+const route = useRoute()
 
 import { defineProps } from 'vue'
 
