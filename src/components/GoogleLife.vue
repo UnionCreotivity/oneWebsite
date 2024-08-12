@@ -1,12 +1,36 @@
 <template>
   <div class="google-life-box">
     <div class="google-life">
-      <div class="item" v-for="(life, index) in GoogleLifeData" :key="index">
+      <div class="item" v-for="(life, index) in GoogleLifeData" :key="index" ref="lifeItems">
         <a :href="life.url" data-fancybox data-type="iframe">
           <img :src="life.icon" alt="" srcset="" />
           <span>{{ life.name }}</span>
         </a>
       </div>
+    </div>
+  </div>
+
+  <div class="right-google-life">
+    <div
+      class="item"
+      v-for="(life, index) in limitedGoogleLifeData"
+      :key="index"
+      ref="rightLifeItems"
+    >
+      <a :href="life.url" data-fancybox data-type="iframe">
+        <img class="item-img" :src="life.icon" alt="" srcset="" />
+        <span>{{ life.name }}</span>
+      </a>
+    </div>
+    <div class="item-more">
+      <a @click="menuBtn('.google-life-box')">
+        <img
+          class="item-img"
+          src="https://ws.srl.tw/img/svg/mapTool/new_more.png"
+          alt=""
+          srcset=""
+        />
+      </a>
     </div>
   </div>
 </template>
@@ -15,15 +39,61 @@ import { Fancybox } from '@fancyapps/ui'
 import '@fancyapps/ui/dist/fancybox/fancybox.css'
 import { onMounted, ref, toRefs, watch } from 'vue'
 import { useGoogleLifeData } from '@/stores/googleLifeData'
+import { gsap } from 'gsap'
 const { GoogleLifeData } = toRefs(useGoogleLifeData())
+const lifeItems = ref<HTMLDivElement[]>([])
+const rightLifeItems = ref<HTMLDivElement[]>([])
 
+const menuBtn = (selector: string) => {
+  const targetElement = document.querySelector(selector)
+  if (targetElement) {
+    targetElement.scrollIntoView({ behavior: 'smooth' })
+  }
+}
+const limitedGoogleLifeData = computed(() => {
+  return Array.isArray(GoogleLifeData.value) ? GoogleLifeData.value.slice(0, 6) : []
+})
 onMounted(() => {
   watch(GoogleLifeData, (data) => {
     console.log(GoogleLifeData)
   })
-})
 
-// Fancybox.bind('[data-fancybox]', {})
+  lifeItems.value.forEach((item) => {
+    const imgElement = item.querySelector('img')
+
+    gsap.fromTo(
+      imgElement,
+      { scale: 1 },
+      {
+        scale: 1.2,
+        duration: 0.3,
+        ease: 'power2.inOut',
+        paused: true,
+        onReverseComplete: () => gsap.set(imgElement, { clearProps: 'scale' })
+      }
+    )
+    item.addEventListener('mouseenter', () => {
+      gsap.to(imgElement, { scale: 1.3, duration: 0.5, ease: 'power2.inOut' })
+    })
+    item.addEventListener('mouseleave', () => {
+      gsap.to(imgElement, { scale: 1, duration: 0.5, ease: 'power2.inOut' })
+    })
+  })
+
+  rightLifeItems.value.forEach((item) => {
+    const rightImgElement = item.querySelector('img')
+    const rightText = item.querySelector('span')
+
+    item.addEventListener('mouseenter', () => {
+      gsap.to(rightImgElement, { opacity: 1, duration: 0.3, ease: 'power2.inOut' })
+      gsap.to(rightText, { opacity: 0, duration: 0.3, ease: 'power2.inOut' })
+    })
+    item.addEventListener('mouseleave', () => {
+      gsap.to(rightImgElement, { opacity: 0, duration: 0.3, ease: 'power2.inOut' })
+      gsap.to(rightText, { opacity: 1, duration: 0.3, ease: 'power2.inOut' })
+    })
+  })
+})
 </script>
 <style lang="scss" scoped>
 .google-life-box {
@@ -38,7 +108,6 @@ onMounted(() => {
 
   .google-life {
     display: flex;
-
     flex-wrap: wrap;
     width: 30%;
     justify-content: center;
@@ -48,6 +117,7 @@ onMounted(() => {
       border-radius: 30px;
       display: flex;
       justify-content: center;
+
       a {
         border-radius: 30px;
         text-decoration: none;
@@ -62,11 +132,62 @@ onMounted(() => {
         flex-direction: column;
         padding: 2vw;
         margin-bottom: 1vw;
+        &:hover {
+          background-color: #4e5b34;
+        }
       }
       img {
         width: 40px;
         margin-bottom: 0.5vw;
       }
+    }
+  }
+}
+
+.right-google-life {
+  position: fixed;
+  right: 1vw;
+  top: 150px;
+  z-index: 100;
+  width: 52px;
+  .item,
+  .item-more {
+    display: flex;
+
+    a {
+      background-color: #778952;
+      border-radius: 12px;
+      margin-bottom: 7px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      padding: 8px 12px;
+      text-align: center;
+      min-width: 45px;
+      min-height: 45px;
+      position: relative;
+      span {
+        color: rgba(255, 255, 255, 0.8) !important;
+        letter-spacing: 1px;
+        font-size: 21px;
+        font-weight: 400 !important;
+      }
+      img {
+        width: 23px;
+        align-items: center;
+        display: flex;
+        position: absolute;
+        top: 10px;
+        left: 12px;
+        opacity: 0;
+      }
+    }
+  }
+
+  .item-more {
+    cursor: pointer;
+    img {
+      top: 20px !important;
+      left: 13px !important;
+      opacity: 1 !important;
     }
   }
 }
