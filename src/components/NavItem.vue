@@ -14,7 +14,7 @@
         </span>
       </button>
 
-      <div class="mobile-project-news-box">
+      <div class="mobile-project-news-box" v-if="hasNews === true">
         <div class="tab-item project-box" :class="{ active: selectedTab === 'project' }">
           <div class="item">
             <button @click="navigate('project')">建案資訊</button>
@@ -45,7 +45,6 @@
     <div class="close" @click="isMenuOpen = false">
       <img id="moblie-menu-close-btn" src="../assets/images/close.svg" alt="" />
     </div>
-
     <div class="moblie-menu">
       <div class="link-box">
         <div class="nav-link">
@@ -65,18 +64,29 @@
 <script lang="ts" setup>
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
-import { ref, toRefs } from 'vue'
+import { onMounted, ref, toRefs } from 'vue'
 import { useCase } from '@/stores/case'
+import { useNewsData } from '@/stores/newsData'
 import { useRouter } from 'vue-router'
 import { aniDelay } from '@/stores/aniDelay'
+
+let { caseData } = toRefs(useCase())
+let { newsData } = toRefs(useNewsData())
+
 const router = useRouter()
 const appStore = aniDelay()
+const isMenuOpen = ref(false)
+const menu_list = {}
+const hasNews = ref(false)
+
+gsap.registerPlugin(ScrollToPlugin)
 
 const navigate = (tab: string) => {
   appStore.setNoDelay(true)
   selectedTab.value = tab // 設置選中的 tab
   router.push('/home')
 }
+
 // 定義選中的選項，默認為空
 const selectedTab = ref<string>('project')
 
@@ -84,11 +94,6 @@ const selectedTab = ref<string>('project')
 const selectTab = (tab: string) => {
   selectedTab.value = tab // 設置選中的 tab
 }
-
-gsap.registerPlugin(ScrollToPlugin)
-let { caseData } = toRefs(useCase())
-const isMenuOpen = ref(false)
-const menu_list = {}
 
 window.addEventListener('scroll', function () {
   if (isMenuOpen.value) {
@@ -102,6 +107,17 @@ const menuBtn = (selector: string) => {
     targetElement.scrollIntoView({ behavior: 'smooth' })
   }
 }
+
+onMounted(() => {
+  watch(newsData, (newData) => {
+    console.log(newData, 'newsData!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    hasNews.value = newData.length > 0
+  })
+
+  watch(hasNews, (hasNews) => {
+    console.log(hasNews, 'hasNews')
+  })
+})
 </script>
 <style lang="scss" scoped>
 @import 'hamburgers/_sass/hamburgers/hamburgers.scss';
@@ -135,7 +151,7 @@ const menuBtn = (selector: string) => {
     max-width: 1400px;
     justify-content: space-between;
     margin: 0 auto;
-
+    background-color: #778952;
     @media all and (max-width: 1024px) {
       max-width: inherit;
       justify-content: inherit;
@@ -151,7 +167,7 @@ const menuBtn = (selector: string) => {
 
     .hamburger {
       display: none;
-      background-color: #778952;
+
       @media all and (max-width: 1024px) {
         display: flex;
       }
@@ -184,7 +200,7 @@ const menuBtn = (selector: string) => {
         width: 50%;
         font-size: 16px;
         height: 100%;
-        background-color: #778952;
+
         a {
           color: white;
           align-items: center;

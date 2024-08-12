@@ -1,6 +1,6 @@
 <template>
   <div class="news-container">
-    <div class="news-list" v-for="(news, index) in newsData" :key="index">
+    <div class="news-list" v-for="(news, index) in newsData" :key="index" v-if="hasData === true">
       <div class="date-box">
         <div class="date">{{ news.StartDate }}</div>
       </div>
@@ -23,19 +23,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, computed } from 'vue'
+import { defineComponent, ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useCase } from '@/stores/case'
 import { gsap } from 'gsap'
 
 export default defineComponent({
   setup() {
-    // 使用 Pinia store
     const { caseData } = useCase()
-
+    const hasData = ref<boolean>(false) // 有無新聞報導
     const newsData = ref<any>({})
 
-    // 發送 GET 請求取得新聞資料
     const fetchNewsData = async () => {
       try {
         const response = await axios.get(
@@ -45,12 +43,13 @@ export default defineComponent({
         newsData.value = data.sort(
           (a: any, b: any) => new Date(b.StartDate).getTime() - new Date(a.StartDate).getTime()
         )
+        hasData.value = newsData.value.length > 0
       } catch (error) {
         console.error('Error fetching news data:', error)
+        hasData.value = false // 發生錯誤時設為 false
       }
     }
 
-    // 當元件掛載時，發送請求
     onMounted(() => {
       fetchNewsData()
       const tl = gsap.timeline({})
@@ -63,6 +62,7 @@ export default defineComponent({
 
     return {
       caseData,
+      hasData,
       newsData
     }
   }
@@ -135,13 +135,5 @@ export default defineComponent({
       }
     }
   }
-}
-/* Add fade transition styles */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active in Vue 2.1.8+ */ {
-  opacity: 0;
 }
 </style>

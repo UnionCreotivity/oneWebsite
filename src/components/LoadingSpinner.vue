@@ -7,13 +7,16 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, toRefs, inject } from 'vue'
+import { onMounted, toRefs, inject, watch } from 'vue'
 import { useCase } from '@/stores/case'
+import { useNewsData } from '@/stores/newsData'
 import { gsap } from 'gsap'
 
 //-- 建案資料 --
 let { caseData } = toRefs(useCase())
+let { newsData } = toRefs(useNewsData())
 const loadingComplete = inject('loadingComplete')
+
 onMounted(() => {
   let tl = gsap.timeline({ delay: 1.2 })
 
@@ -22,6 +25,13 @@ onMounted(() => {
     .to('.LoadingSpinner', { opacity: 0, duration: 1 }, '<0.3')
 
     .to('.LoadingSpinner', { visibility: 'hidden' }, '>-0.2')
+  useNewsData().$subscribe((mutation, state) => {
+    // console.log(state.newsData, 'newsData after fetch')
+    // 其他需要在資料載入後執行的邏輯可以放在這裡
+  })
+  // watch(newsData, (newValue) => {
+  //   console.log(newValue, 'newsData')
+  // })
 })
 </script>
 <style lang="scss" scoped>
