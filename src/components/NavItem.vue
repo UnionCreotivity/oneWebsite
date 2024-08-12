@@ -76,7 +76,6 @@ let { newsData } = toRefs(useNewsData())
 const router = useRouter()
 const appStore = aniDelay()
 const isMenuOpen = ref(false)
-const menu_list = {}
 const hasNews = ref(false)
 
 gsap.registerPlugin(ScrollToPlugin)
@@ -102,21 +101,33 @@ window.addEventListener('scroll', function () {
 })
 
 const menuBtn = (selector: string) => {
-  const targetElement = document.querySelector(selector)
-  if (targetElement) {
-    targetElement.scrollIntoView({ behavior: 'smooth' })
+  // 如果當前頁面是 "/news"，先跳轉到 "/home"
+  if (router.currentRoute.value.path === '/news') {
+    router.push('/home').then(() => {
+      // 確保頁面跳轉完成後再進行滾動到指定的目標元素
+      const targetElement = document.querySelector(selector)
+      if (targetElement) {
+        // 加一個延遲，確保頁面內容完全載入後再滾動
+        setTimeout(() => {
+          targetElement.scrollIntoView({ behavior: 'smooth' })
+        }, 300)
+      }
+    })
+  } else {
+    // 如果不是 "/news"，直接進行滾動
+    const targetElement = document.querySelector(selector)
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 }
 
 onMounted(() => {
   watch(newsData, (newData) => {
-    console.log(newData, 'newsData!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     hasNews.value = newData.length > 0
   })
 
-  watch(hasNews, (hasNews) => {
-    console.log(hasNews, 'hasNews')
-  })
+  watch(hasNews, (hasNews) => {})
 })
 </script>
 <style lang="scss" scoped>
