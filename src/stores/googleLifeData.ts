@@ -13,7 +13,6 @@ export const useGoogleLifeData = defineStore('Life', () => {
       .then((response) => {
         if (response.data.success) {
           GoogleLifeData.value = response.data.data
-          console.log(GoogleLifeData.value)
         }
       })
       .catch((error) => {

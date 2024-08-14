@@ -1,8 +1,14 @@
 <template>
   <div class="google-life-box">
     <div class="google-life">
-      <div class="item" v-for="(life, index) in GoogleLifeData" :key="index" ref="lifeItems">
-        <a :href="life.url" data-fancybox data-type="iframe">
+      <div class="item" v-for="(life, index) in GoogleLifeData" :key="index">
+        <a
+          :href="life.url"
+          data-fancybox
+          data-type="iframe"
+          @mouseenter="mouseenter"
+          @mouseleave="mouseleave"
+        >
           <img :src="life.icon" alt="" srcset="" />
           <span>{{ life.name }}</span>
         </a>
@@ -10,14 +16,20 @@
     </div>
   </div>
 
-  <div class="right-google-life">
+  <div class="right-google-life" v-if="isMobile === false">
     <div
       class="item"
       v-for="(life, index) in limitedGoogleLifeData"
       :key="index"
       ref="rightLifeItems"
     >
-      <a :href="life.url" data-fancybox data-type="iframe">
+      <a
+        :href="life.url"
+        data-fancybox
+        data-type="iframe"
+        @mouseenter="rightMouseenter"
+        @mouseleave="rightMouseleave"
+      >
         <img class="item-img" :src="life.icon" alt="" srcset="" />
         <span>{{ life.name }}</span>
       </a>
@@ -35,64 +47,48 @@
   </div>
 </template>
 <script setup lang="ts">
-import { Fancybox } from '@fancyapps/ui'
 import '@fancyapps/ui/dist/fancybox/fancybox.css'
-import { onMounted, ref, toRefs, watch } from 'vue'
+import { onMounted, toRefs, watch } from 'vue'
 import { useGoogleLifeData } from '@/stores/googleLifeData'
 import { gsap } from 'gsap'
 const { GoogleLifeData } = toRefs(useGoogleLifeData())
-const lifeItems = ref<HTMLDivElement[]>([])
-const rightLifeItems = ref<HTMLDivElement[]>([])
 
-const menuBtn = (selector: string) => {
-  const targetElement = document.querySelector(selector)
+const screenWidth = ref(document.documentElement.clientWidth)
+const isMobile = ref(screenWidth.value < 1024)
+
+const menuBtn = (btn: string) => {
+  const targetElement = document.querySelector(btn)
   if (targetElement) {
     targetElement.scrollIntoView({ behavior: 'smooth' })
   }
 }
+
 const limitedGoogleLifeData = computed(() => {
   return Array.isArray(GoogleLifeData.value) ? GoogleLifeData.value.slice(0, 6) : []
 })
+
+//下方食衣住行
+const mouseenter = (item: any) => {
+  gsap.to(item.srcElement.children[0], { scale: 1.25, duration: 0.5, ease: 'power2.inOut' })
+}
+
+const mouseleave = (item: any) => {
+  gsap.to(item.srcElement.children[0], { scale: 1, duration: 0.5, ease: 'power2.inOut' })
+}
+
+//右側食衣住行
+const rightMouseenter = (item: any) => {
+  gsap.to(item.srcElement.children[0], { opacity: 1, duration: 0.3, ease: 'power2.inOut' })
+  gsap.to(item.srcElement.children[1], { opacity: 0, duration: 0.3, ease: 'power2.inOut' })
+}
+
+const rightMouseleave = (item: any) => {
+  gsap.to(item.srcElement.children[0], { opacity: 0, duration: 0.3, ease: 'power2.inOut' })
+  gsap.to(item.srcElement.children[1], { opacity: 1, duration: 0.3, ease: 'power2.inOut' })
+}
+
 onMounted(() => {
-  watch(GoogleLifeData, (data) => {
-    console.log(GoogleLifeData)
-  })
-
-  lifeItems.value.forEach((item) => {
-    const imgElement = item.querySelector('img')
-
-    gsap.fromTo(
-      imgElement,
-      { scale: 1 },
-      {
-        scale: 1.2,
-        duration: 0.3,
-        ease: 'power2.inOut',
-        paused: true,
-        onReverseComplete: () => gsap.set(imgElement, { clearProps: 'scale' })
-      }
-    )
-    item.addEventListener('mouseenter', () => {
-      gsap.to(imgElement, { scale: 1.3, duration: 0.5, ease: 'power2.inOut' })
-    })
-    item.addEventListener('mouseleave', () => {
-      gsap.to(imgElement, { scale: 1, duration: 0.5, ease: 'power2.inOut' })
-    })
-  })
-
-  rightLifeItems.value.forEach((item) => {
-    const rightImgElement = item.querySelector('img')
-    const rightText = item.querySelector('span')
-
-    item.addEventListener('mouseenter', () => {
-      gsap.to(rightImgElement, { opacity: 1, duration: 0.3, ease: 'power2.inOut' })
-      gsap.to(rightText, { opacity: 0, duration: 0.3, ease: 'power2.inOut' })
-    })
-    item.addEventListener('mouseleave', () => {
-      gsap.to(rightImgElement, { opacity: 0, duration: 0.3, ease: 'power2.inOut' })
-      gsap.to(rightText, { opacity: 1, duration: 0.3, ease: 'power2.inOut' })
-    })
-  })
+  watch(GoogleLifeData, (data) => {})
 })
 </script>
 <style lang="scss" scoped>

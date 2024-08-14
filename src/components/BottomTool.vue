@@ -39,6 +39,15 @@
         </a>
       </div>
 
+      <div class="item" @click="openLife">
+        <a>
+          <div class="item-icon-box">
+            <img class="item-icon" src="../assets/images/new_life.png" />
+          </div>
+          <div class="item-text">生活機能</div>
+        </a>
+      </div>
+
       <div class="item" v-if="caseData.location != null">
         <a :href="caseData.location" target="_blank">
           <div class="item-icon-box">
@@ -54,6 +63,27 @@
             <img class="item-icon" src="../assets/images/new_more.png" />
           </div>
           <div class="item-text">更多功能</div>
+        </a>
+      </div>
+    </div>
+    <div class="google-life-box-mobile" :style="{ opacity: isLifeBoxVisible ? 1 : 0 }">
+      <div class="google-life-item" v-for="(life, index) in limitedGoogleLifeData" :key="index">
+        <a :href="life.url" data-fancybox data-type="iframe">
+          <img :src="life.icon" alt="" srcset="" />
+          <span>{{ life.name }}</span>
+        </a>
+      </div>
+      <div class="item-more">
+        <a @click="menuBtn('.google-life-box')">
+          <div class="img-box">
+            <img
+              class="item-img"
+              src="https://ws.srl.tw/img/svg/mapTool/new_more.png"
+              alt=""
+              srcset=""
+            />
+          </div>
+          <span>更多</span>
         </a>
       </div>
     </div>
@@ -114,8 +144,25 @@
 import LightBox from '../tool/LightBox.vue'
 import QRCodeVue3 from 'qr-code-generator-vue3'
 import { useCase } from '@/stores/case'
+import { useGoogleLifeData } from '@/stores/googleLifeData'
 import { gsap } from 'gsap'
+const { GoogleLifeData } = toRefs(useGoogleLifeData())
 
+const limitedGoogleLifeData = computed(() => {
+  return Array.isArray(GoogleLifeData.value) ? GoogleLifeData.value.slice(0, 6) : []
+})
+
+const isLifeBoxVisible = ref(false)
+
+const menuBtn = (btn: string) => {
+  const targetElement = document.querySelector(btn)
+  if (targetElement) {
+    targetElement.scrollIntoView({ behavior: 'smooth' })
+  }
+}
+const openLife = () => {
+  isLifeBoxVisible.value = !isLifeBoxVisible.value // 切換狀態
+}
 //-- 建案資料 --
 let { caseData } = toRefs(useCase())
 
@@ -159,6 +206,10 @@ function copyLink() {
     }
   )
 }
+
+onMounted(() => {
+  watch(GoogleLifeData, (data) => {})
+})
 </script>
 
 <style lang="scss" scoped>
@@ -330,5 +381,87 @@ function copyLink() {
       }
     }
   }
+}
+
+.google-life-box-mobile {
+  position: absolute;
+  display: flex;
+  bottom: 60px;
+  background-color: #2f2f2fee;
+  width: 100%;
+  justify-content: space-evenly;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  @media all and (max-width: 500px) {
+    padding-top: 1vw;
+    padding-bottom: 0.5vw;
+  }
+  .google-life-item {
+    display: flex;
+    justify-content: center;
+    padding-top: 1.5vw;
+    padding-bottom: 1.5vw;
+    width: 10%;
+    a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 20px;
+        height: 21px;
+      }
+
+      span {
+        color: rgba(255, 255, 255, 0.8) !important;
+        letter-spacing: 1px;
+        font-size: 16px;
+        margin-top: 1vw;
+        @media all and (max-width: 1024px) {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .item-more {
+    display: flex;
+    justify-content: center;
+    padding-top: 1.5vw;
+    padding-bottom: 1.5vw;
+    width: 10%;
+    a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .img-box {
+        width: 20px;
+        height: 21px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        img {
+          width: 20px;
+          vertical-align: middle;
+        }
+      }
+
+      span {
+        color: rgba(255, 255, 255, 0.8) !important;
+        letter-spacing: 1px;
+        font-size: 16px;
+        margin-top: 1vw;
+        @media all and (max-width: 1024px) {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+.is-compact .fancybox__content > .f-button.is-close-btn {
+  --f-button-border-radius: 0%;
 }
 </style>

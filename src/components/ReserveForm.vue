@@ -468,6 +468,10 @@ const submitForm = async () => {
     .text-danger {
       color: red;
       margin-left: 1%;
+      font-size: 20px;
+      @media all and (max-width: 1440px) {
+        font-size: 16px;
+      }
     }
 
     .cut-form-split-line {
@@ -622,6 +626,7 @@ const submitForm = async () => {
 
   label {
     font-size: 0.9vw;
+    cursor: pointer;
     @media all and (max-width: 1024px) {
       font-size: 3.5vw;
     }

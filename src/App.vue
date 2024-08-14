@@ -36,7 +36,7 @@ img {
 }
 
 .fancybox__backdrop {
-  background: rgba(0, 0, 0, 0.445) !important;
+  background: rgba(0, 0, 0, 0.76) !important;
 }
 
 .fancybox__content {
@@ -53,6 +53,14 @@ img {
 .fancybox__content > .f-button.is-close-btn {
   --f-button-width: 1.8vw !important;
   --f-button-height: 1.8vw !important;
+  @media all and (max-width: 1024px) {
+    --f-button-width: 4.8vw !important;
+    --f-button-height: 4.8vw !important;
+  }
+  @media all and (max-width: 500px) {
+    --f-button-width: 6.5vw !important;
+    --f-button-height: 7vw !important;
+  }
 }
 
 .fancybox__content > .f-button.is-close-btn {
@@ -60,5 +68,19 @@ img {
   opacity: 1;
   top: 1vw;
   right: 2vw;
+  @media all and (max-width: 1024px) {
+    top: -6vw;
+    right: 1vw;
+    opacity: 1 !important;
+  }
+}
+
+.is-compact .fancybox__content > .f-button.is-close-btn {
+  --f-button-border-radius: 0% !important;
+  @media all and (max-width: 500px) {
+    top: -2vw !important;
+    right: 3vw !important;
+    width: 7vw !important;
+  }
 }
 </style>
