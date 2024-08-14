@@ -182,13 +182,35 @@ onMounted(() => {
       @media all and (max-width: 1024px) {
         display: flex;
       }
-
+      @media all and (max-width: 500px) {
+        padding: 10px 15px;
+      }
       .hamburger-inner,
       .hamburger-inner::before,
       .hamburger-inner::after {
         background-color: #fff;
-        width: 34px;
+        width: 38px;
         height: 3px;
+        @media all and (max-width: 500px) {
+          width: 18px;
+          height: 2px;
+        }
+      }
+      .hamburger-inner::before {
+        @media all and (max-width: 500px) {
+          top: 5px;
+        }
+      }
+      .hamburger-inner::after {
+        @media all and (max-width: 500px) {
+          top: 10px;
+        }
+      }
+      .hamburger-box {
+        @media all and (max-width: 500px) {
+          width: 18px;
+          height: 12px;
+        }
       }
     }
 
@@ -211,7 +233,9 @@ onMounted(() => {
         width: 50%;
         font-size: 16px;
         height: 100%;
-
+        @media all and (max-width: 500px) {
+          font-size: 14px;
+        }
         a {
           color: white;
           align-items: center;
@@ -243,6 +267,9 @@ onMounted(() => {
           letter-spacing: 0.2em;
           width: 50%;
           font-size: 16px;
+          @media all and (max-width: 500px) {
+            font-size: 14px;
+          }
         }
       }
     }
@@ -265,6 +292,9 @@ onMounted(() => {
           font-family: 'Noto Sans TC';
           font-weight: 400;
           text-decoration: none;
+          @media all and (max-width: 500px) {
+            font-size: 14px;
+          }
         }
       }
     }

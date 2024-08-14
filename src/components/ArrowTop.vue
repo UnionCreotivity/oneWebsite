@@ -25,7 +25,7 @@ const scrollTop = () => {
   z-index: 30;
   width: 45px;
   border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.15);
   height: 45px;
   cursor: pointer;
 
@@ -38,7 +38,7 @@ const scrollTop = () => {
   }
 
   @media all and (max-width: 500px) {
-    bottom: 18vw;
+    bottom: 25vw;
   }
   .arrow {
     z-index: 32;
