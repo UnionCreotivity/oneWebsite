@@ -29,13 +29,12 @@
       </div>
 
       <div class="item">
-        <a href="javascript:;">
+        <a>
           <div class="item-icon-box">
             <img class="item-icon" src="../assets/images/pen.svg" />
           </div>
-          <router-link class="item-text" :to="{ path: '/', hash: '#reserveForm' }"
-            >預約賞屋</router-link
-          >
+
+          <div @click="menuBtn('#reserveForm')" class="item-text">預約賞屋</div>
         </a>
       </div>
 
@@ -57,8 +56,8 @@
         </a>
       </div>
 
-      <div class="item">
-        <a href="javascript:;" @click="show_more_tool = !show_more_tool">
+      <div class="item" @click="opeMore">
+        <a>
           <div class="item-icon-box more-icon">
             <img class="item-icon" src="../assets/images/new_more.png" />
           </div>
@@ -66,7 +65,13 @@
         </a>
       </div>
     </div>
-    <div class="google-life-box-mobile" :style="{ opacity: isLifeBoxVisible ? 1 : 0 }">
+    <div
+      class="google-life-box-mobile"
+      :style="{
+        opacity: isLifeBoxVisible ? 1 : 0,
+        pointerEvents: isLifeBoxVisible ? 'auto' : 'none'
+      }"
+    >
       <div class="google-life-item" v-for="(life, index) in limitedGoogleLifeData" :key="index">
         <a :href="life.url" data-fancybox data-type="iframe">
           <img :src="life.icon" alt="" srcset="" />
@@ -89,7 +94,10 @@
     </div>
   </div>
 
-  <div class="more_tool_div" :class="{ show: show_more_tool }">
+  <div
+    class="more_tool_div"
+    :style="{ opacity: isMoreVisible ? 1 : 0, pointerEvents: isMoreVisible ? 'auto' : 'none' }"
+  >
     <div class="tools">
       <div class="item">
         <a href="javascript:;" @click="copyLink">
@@ -153,6 +161,7 @@ const limitedGoogleLifeData = computed(() => {
 })
 
 const isLifeBoxVisible = ref(false)
+const isMoreVisible = ref(false)
 
 const menuBtn = (btn: string) => {
   const targetElement = document.querySelector(btn)
@@ -162,6 +171,9 @@ const menuBtn = (btn: string) => {
 }
 const openLife = () => {
   isLifeBoxVisible.value = !isLifeBoxVisible.value // 切換狀態
+}
+const opeMore = () => {
+  isMoreVisible.value = !isMoreVisible.value // 切換狀態
 }
 //-- 建案資料 --
 let { caseData } = toRefs(useCase())
@@ -253,12 +265,10 @@ onMounted(() => {
   .tools {
     display: flex;
     width: 100%;
-
     .item {
       display: flex;
       flex: 1;
       height: 100%;
-      padding: 10px 0vw;
       flex-direction: column;
       align-items: center;
       border-right: 1px solid #fff;
@@ -275,26 +285,43 @@ onMounted(() => {
         position: relative;
         font-size: 11px;
         text-align: center;
-
         letter-spacing: 0.1em;
         font-family: 'Noto Sans TC';
         font-weight: 400;
         text-decoration: none;
         justify-content: space-evenly;
+        padding: 2vw;
+        @media all and (max-width: 500px) {
+          padding-left: 0vw;
+          padding-right: 0vw;
+        }
         .item-icon-box {
           display: flex;
-
           justify-content: center;
           align-self: center;
           img {
-            width: 17px;
-            height: 19px;
+            width: 30px;
+            height: 30px;
             object-fit: contain;
+
+            @media all and (max-width: 500px) {
+              width: 17px;
+              height: 19px;
+            }
+          }
+        }
+
+        .item-text {
+          font-size: 2.2vw;
+          @media all and (max-width: 500px) {
+            font-size: 12px;
+          }
+          @media all and (max-width: 330px) {
+            font-size: 1px;
           }
         }
 
         .more-icon {
-          // height: 4vw;
           flex-direction: column;
           justify-content: center;
           align-items: center;
@@ -311,73 +338,78 @@ onMounted(() => {
   display: none;
   width: 100%;
   position: fixed;
-  z-index: 10;
-  bottom: 60px;
+  bottom: 95px;
   justify-content: flex-end;
   background-color: #000000d9;
-  transform: translateY(60px);
-  transition: transform 0.3s;
-
+  opacity: 0;
+  z-index: 99999;
+  transition: opacity 0.5s ease;
   @media (max-width: 1024px) {
     display: flex;
   }
 
-  &.show {
-    transform: translateY(0px);
+  @media (max-width: 500px) {
+    bottom: 60px;
   }
 
   .tools {
     display: flex;
-    // width: 100%;
-
+    padding: 1.5vw;
+    padding-right: 1vw;
+    width: 32.5%;
+    justify-content: right;
     .item {
       display: flex;
       flex: 1;
-      height: 100%;
-      padding: 10px 0vw;
       flex-direction: column;
       align-items: center;
-      width: 50px;
-
-      &:last-of-type {
-        border: none;
-      }
+      width: 25%;
 
       a {
         display: flex;
-        gap: 7px;
         flex-direction: column;
         color: #fff;
         position: relative;
-        font-size: 11px;
         text-align: center;
-
         letter-spacing: 0.1em;
         font-family: 'Noto Sans TC';
         font-weight: 400;
         text-decoration: none;
         justify-content: space-evenly;
+
+        .item-text {
+          font-size: 2.2vw;
+          @media all and (max-width: 500px) {
+            font-size: 12px;
+          }
+          @media all and (max-width: 330px) {
+            font-size: 1px;
+          }
+        }
         .item-icon-box {
           display: flex;
-
           justify-content: center;
           align-self: center;
+          margin-bottom: 1vw;
           img {
-            width: 17px;
-            height: 19px;
+            width: 30px;
+            height: 30px;
             object-fit: contain;
+            @media all and (max-width: 500px) {
+              width: 17px;
+              height: 19px;
+            }
           }
         }
 
-        .more-icon {
-          // height: 4vw;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          img {
-            width: 25px;
-          }
-        }
+        // .more-icon {
+        //   flex-direction: column;
+        //   justify-content: center;
+        //   align-items: center;
+        //   img {
+        //     width: 25px;
+        //   }
+        // }
       }
     }
   }
@@ -392,9 +424,13 @@ onMounted(() => {
   justify-content: space-evenly;
   opacity: 0;
   transition: opacity 0.5s ease;
+  @media all and (max-width: 1024px) {
+    bottom: 100px;
+  }
   @media all and (max-width: 500px) {
     padding-top: 1vw;
     padding-bottom: 0.5vw;
+    bottom: 60px;
   }
   .google-life-item {
     display: flex;
@@ -409,17 +445,24 @@ onMounted(() => {
       justify-content: center;
 
       img {
-        width: 20px;
-        height: 21px;
+        width: 30px;
+        height: 30px;
+        @media all and (max-width: 500px) {
+          width: 20px;
+          height: 20px;
+        }
       }
 
       span {
         color: rgba(255, 255, 255, 0.8) !important;
         letter-spacing: 1px;
-        font-size: 16px;
         margin-top: 1vw;
-        @media all and (max-width: 1024px) {
+        font-size: 2.2vw;
+        @media all and (max-width: 500px) {
           font-size: 12px;
+        }
+        @media all and (max-width: 330px) {
+          font-size: 1px;
         }
       }
     }
@@ -436,25 +479,34 @@ onMounted(() => {
       align-items: center;
       justify-content: center;
       .img-box {
-        width: 20px;
-        height: 21px;
-
+        width: 30px;
+        height: 30px;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        img {
+        @media all and (max-width: 500px) {
           width: 20px;
+          height: 20px;
+        }
+        img {
+          width: 30px;
           vertical-align: middle;
+          @media all and (max-width: 500px) {
+            width: 20px;
+          }
         }
       }
 
       span {
         color: rgba(255, 255, 255, 0.8) !important;
         letter-spacing: 1px;
-        font-size: 16px;
         margin-top: 1vw;
-        @media all and (max-width: 1024px) {
+        font-size: 2.2vw;
+        @media all and (max-width: 500px) {
           font-size: 12px;
+        }
+        @media all and (max-width: 330px) {
+          font-size: 1px;
         }
       }
     }

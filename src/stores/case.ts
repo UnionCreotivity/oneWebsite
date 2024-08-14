@@ -30,6 +30,7 @@ export const useCase = defineStore('case', () => {
       .then((response) => {
         if (response.data.success) {
           caseData.value = response.data.data
+          console.log(caseData.value)
         }
       })
       .catch((error) => {

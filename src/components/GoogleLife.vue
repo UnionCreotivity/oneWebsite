@@ -99,7 +99,6 @@ onMounted(() => {
   padding-bottom: 4vw;
   display: flex;
   position: relative;
-  //   background-color: #778952;
   justify-content: center;
 
   .google-life {
@@ -107,7 +106,15 @@ onMounted(() => {
     flex-wrap: wrap;
     width: 30%;
     justify-content: center;
-
+    @media all and (max-width: 1760px) {
+      width: 36%;
+    }
+    @media all and (max-width: 1440px) {
+      width: 45%;
+    }
+    @media all and (max-width: 1024px) {
+      width: 90%;
+    }
     .item {
       width: 30%;
       border-radius: 30px;
@@ -128,13 +135,36 @@ onMounted(() => {
         flex-direction: column;
         padding: 2vw;
         margin-bottom: 1vw;
+        @media all and (max-width: 1440px) {
+          margin-bottom: 1.5vw;
+        }
+        @media all and (max-width: 1024px) {
+          padding: 4vw;
+          margin-bottom: 3.5vw;
+        }
+        @media all and (max-width: 500px) {
+          border-radius: 15px;
+        }
         &:hover {
           background-color: #4e5b34;
+        }
+
+        span {
+          @media all and (max-width: 1024px) {
+            font-size: 2.8vw;
+          }
         }
       }
       img {
         width: 40px;
         margin-bottom: 0.5vw;
+        @media all and (max-width: 1440px) {
+          margin-bottom: 1vw;
+        }
+        @media all and (max-width: 1024px) {
+          width: 5vw;
+          margin-bottom: 2vw;
+        }
       }
     }
   }

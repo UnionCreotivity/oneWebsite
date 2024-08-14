@@ -52,6 +52,8 @@
                 <div class="text-danger">*</div>
                 <div class="cut-form-split-line cut-form-special-line">&nbsp;</div>
                 <select v-model="selectedCity">
+                  <option value="">請選擇縣市</option>
+                  <!-- 添加的選項 -->
                   <option v-for="city in cities" :key="city" :value="city">{{ city }}</option>
                 </select>
               </div>
@@ -94,7 +96,11 @@
           <div class="form-privacy-check">
             <label
               ><input id="ca_privacy" type="checkbox" v-model="caPrivacyChecked" />
-              本人知悉並同意『<a href="privacy.html" target="_blank">個資告知事項聲明</a>』內容
+              本人知悉並同意『<a
+                href="https://ws.srl.tw/cs/2024051711015229/privacy.html"
+                target="_blank"
+                >個資告知事項聲明</a
+              >』內容
             </label>
           </div>
         </div>
